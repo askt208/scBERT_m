@@ -1,8 +1,8 @@
 import scanpy as sc, numpy as np, pandas as pd, anndata as ad
 from scipy import sparse
 
-panglao = sc.read_h5ad('./data/panglao_10000.h5ad')
-data = sc.read_h5ad('./data/your_raw_data.h5ad')
+panglao = sc.read_h5ad('/students/2024-2025/master/mwu/p6/panglao_10000.h5ad')
+data = sc.read_h5ad('/students/2024-2025/master/mwu/p6/Zheng68K.h5ad')
 counts = sparse.lil_matrix((data.X.shape[0],panglao.X.shape[1]),dtype=np.float32)
 ref = panglao.var_names.tolist()
 obj = data.var_names.tolist()
@@ -22,6 +22,6 @@ new.uns = panglao.uns
 sc.pp.filter_cells(new, min_genes=200)
 sc.pp.normalize_total(new, target_sum=1e4)
 sc.pp.log1p(new, base=2)
-new.write('./data/preprocessed_data.h5ad')
+new.write('/students/2024-2025/master/mwu/p6/preprocessed_data.h5ad')
 
 
