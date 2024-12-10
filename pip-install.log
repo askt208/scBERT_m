@@ -1,0 +1,20 @@
+2024-12-10T11:44:32,462 Using pip 24.2 from /homes/pwu2/anaconda3/envs/scbert_compatible_env/lib/python3.9/site-packages/pip (python 3.9)
+2024-12-10T11:44:32,466 Non-user install because site-packages writeable
+2024-12-10T11:44:32,466 Disabling truststore because Python version isn't 3.10+
+2024-12-10T11:44:32,526 Created temporary directory: /tmp/pip-build-tracker-ojs8krxo
+2024-12-10T11:44:32,526 Initialized build tracking at /tmp/pip-build-tracker-ojs8krxo
+2024-12-10T11:44:32,526 Created build tracker: /tmp/pip-build-tracker-ojs8krxo
+2024-12-10T11:44:32,527 Entered build tracker: /tmp/pip-build-tracker-ojs8krxo
+2024-12-10T11:44:32,527 Created temporary directory: /tmp/pip-install-ja29nvmv
+2024-12-10T11:44:32,529 Created temporary directory: /tmp/pip-ephem-wheel-cache-vjsa8fow
+2024-12-10T11:44:32,559 Requirement already satisfied: torch==1.8.1 in /homes/pwu2/anaconda3/envs/scbert_compatible_env/lib/python3.9/site-packages (1.8.1+cpu)
+2024-12-10T11:44:32,560 Requirement already satisfied: torchvision==0.9.1 in /homes/pwu2/anaconda3/envs/scbert_compatible_env/lib/python3.9/site-packages (0.9.1+cpu)
+2024-12-10T11:44:32,563 Requirement already satisfied: typing-extensions in /homes/pwu2/anaconda3/envs/scbert_compatible_env/lib/python3.9/site-packages (from torch==1.8.1) (4.12.2)
+2024-12-10T11:44:32,565 Requirement already satisfied: numpy in /homes/pwu2/anaconda3/envs/scbert_compatible_env/lib/python3.9/site-packages (from torch==1.8.1) (1.26.4)
+2024-12-10T11:44:32,569 Requirement already satisfied: pillow>=4.1.1 in /homes/pwu2/anaconda3/envs/scbert_compatible_env/lib/python3.9/site-packages (from torchvision==0.9.1) (11.0.0)
+2024-12-10T11:44:32,582 Created temporary directory: /tmp/pip-unpack-rne4odgl
+2024-12-10T11:44:32,603 Disabling truststore because Python version isn't 3.10+
+2024-12-10T11:44:32,608 Remote version of pip: 24.3.1
+2024-12-10T11:44:32,608 Local version of pip:  24.2
+2024-12-10T11:44:32,609 Was pip installed by pip? False
+2024-12-10T11:44:32,610 Removed build tracker: '/tmp/pip-build-tracker-ojs8krxo'

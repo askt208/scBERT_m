@@ -13,6 +13,7 @@ from scipy import sparse
 from sklearn.model_selection import train_test_split, ShuffleSplit, StratifiedShuffleSplit, StratifiedKFold
 from sklearn.metrics import accuracy_score, f1_score, confusion_matrix, precision_recall_fscore_support, classification_report
 import torch
+#print(torch.cuda.is_available())
 from torch import nn
 from torch.optim import Adam, SGD, AdamW
 from torch.nn import functional as F
@@ -66,10 +67,29 @@ POS_EMBED_USING = args.pos_embed
 model_name = args.model_name
 ckpt_dir = args.ckpt_dir
 
-dist.init_process_group(backend='nccl')
-torch.cuda.set_device(local_rank)
-device = torch.device("cuda", local_rank)
-world_size = torch.distributed.get_world_size()
+dist.init_process_group(backend='gloo')
+# Remove GPU-specific lines
+#torch.cuda.set_device(local_rank)
+#device = torch.device("cuda", local_rank)
+
+world_size = int(os.environ.get("WORLD_SIZE", 1))
+local_rank = int(os.environ.get("LOCAL_RANK", 0))
+if world_size > 1:
+    dist.init_process_group(backend='gloo')
+
+# Use CPU device
+
+model = PerformerLM(
+    num_tokens = CLASS,
+    dim = 200,
+    depth = 6,
+    max_seq_len = SEQ_LEN,
+    heads = 10,
+    local_attn_heads = 0,
+    g2v_position_emb = POS_EMBED_USING
+)
+device = torch.device("cpu")
+model = model.to(device)
 
 seed_all(SEED + torch.distributed.get_rank())
 
@@ -149,16 +169,16 @@ train_sampler = DistributedSampler(train_dataset)
 val_sampler = DistributedSampler(val_dataset)
 train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, sampler=train_sampler)
 val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, sampler=val_sampler)
-
-model = PerformerLM(
-    num_tokens = CLASS,
-    dim = 200,
-    depth = 6,
-    max_seq_len = SEQ_LEN,
-    heads = 10,
-    local_attn_heads = 0,
-    g2v_position_emb = POS_EMBED_USING
-)
+# move to line 82
+# model = PerformerLM(
+#     num_tokens = CLASS,
+#     dim = 200,
+#     depth = 6,
+#     max_seq_len = SEQ_LEN,
+#     heads = 10,
+#     local_attn_heads = 0,
+#     g2v_position_emb = POS_EMBED_USING
+# )
 
 path = args.model_path
 ckpt = torch.load(path)
